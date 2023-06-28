@@ -1,5 +1,11 @@
 <div>
-  <h1>Welcome to the Catando Ando Coffee Shop</h1>
+  <?php
+    if(!isset($x)){
+    $x='desconocido';
+    }
+  ?>
+  <h1>Welcome to the Catando Ando Coffee Shop <?= $x ?> </h1>
+
   <p>
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime ex id
     tempora consequatur quas assumenda cum sequi fuga laudantium adipisci

@@ -6,7 +6,7 @@
         //creamos nuestro constructor 
         public function __construct(){
             //requerimos el archivo de coneccion a la base de datos 
-            require_once('../config/coneccion.php');
+            require_once('app/config/coneccion.php');
             //asignamos la instancoia de la coneccion a bdconnection
             $this->bdconnection= new BDConnection();
         }

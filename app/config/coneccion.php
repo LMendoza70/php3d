@@ -6,13 +6,13 @@
     //definimos el constructor de la clase conection 
     public function __construct(){
         //llmamos a una instancia de la configuracion
-        require_once('./config.php');
+        require_once('app/config/config.php');
         //creqamos la coneccion a la base de datos 
         $this->connection = new mysqli(BD_HOST, BD_USER, BD_PASSWORD, DB_NAME);
         //manejo de errores en caso de que no se logre la coneccion 
         if($this->connection->connect_error)
         {
-            die('Error de coneccion a la base de datos : '.$this->connection->connect->error)
+            die('Error de coneccion a la base de datos : '.$this->connection->connect->error);
         }
     }
 
