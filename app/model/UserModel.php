@@ -19,7 +19,7 @@
             //creamos la consulta
             $sql="SELECT * FROM user";
             //conectamos con la base de datos //obtener la coneccion 
-            $connection=$this->bdconnection->getConnection();
+            $connection=$this->bdconnection->getConecction();
             //ejecutamos la consulta 
             $result=$connection->query($sql);
             //creamos un arreglo para almacenar cada uno de los usuarios obtenidos de la consulta
@@ -30,7 +30,7 @@
             }
             //ya que tenemos los valores de la consulta en una variable que podemos manipular 
             //cerramos la coneccion 
-            $bdconnection->closeConnection();
+            $this->bdconnection->closeConnection();
             //retornamos el resultado de la consulta (ya manipulable )
             return $users;          
         }
@@ -77,6 +77,30 @@
         }
 
         //metodo para insertar usuarios 
+        public function Add($user){
+            //paso 1 creamos la la consulta
+                $sql='INSERT INTO user (Nombre,ApPaterno,ApMaterno,Usuario,Password,Sexo,FchNacimiento)
+                VALUES ("'.$user['Nombre'].'","'.$user['ApPaterno'].'"
+                ,"'.$user['ApMaterno'].'","'.$user['Usuario'].'","'.$user['Password'].'"
+                ,"'.$user['Sexo'].'","'.$user['FchNacimiento'].'")';
+            //paso 2 conectamos con la base de datos
+                $connection=$this->bdconnection->getConecction();
+            //paso 3 ejecutamos la consulta
+                $result =$connection->query($sql);
+            //paso 4 preparar la respuesta
+                if($result){
+                    $response=true;
+                }else{
+                    $response=false;
+                }   
+            //paso 5 cerrar la coneccion
+                $this->bdconnection->closeConnection();
+            //paso 6 arrojar el resultado listo
+                return $response;
+
+
+        }
+
         
         //metodo para eliminar usuarios 
 

@@ -8,7 +8,7 @@
         //llmamos a una instancia de la configuracion
         require_once('app/config/config.php');
         //creqamos la coneccion a la base de datos 
-        $this->connection = new mysqli(BD_HOST, BD_USER, BD_PASSWORD, DB_NAME);
+        $this->connection = new mysqli(BD_HOST, BD_USER, BD_PASSWORD, BD_NAME);
         //manejo de errores en caso de que no se logre la coneccion 
         if($this->connection->connect_error)
         {

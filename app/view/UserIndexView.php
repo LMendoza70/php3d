@@ -4,20 +4,33 @@
         en esta seeccion podremos tener el control de nuestros usuarios 
     </p>
     <p>
-        <a href="">Agregar un nuevo usuario</a>
+        <!-- en esta parte se debe de poner la ruta del controlador y el metodo que se va a ejecutar -->
+        <!-- para llamar al formulario de agregar usuario -->                    
+        <a href="http://localhost/php3d/?C=UserController&M=CallFormAdd">Agregar un nuevo usuario</a>
     </p>
-    <table>
-        <th>
-            <td>Nombre</td>
-            <td>Apellido Paterno</td>
-            <td>Apellido Materno</td>
-            <td>Usuario</td>
-            <td>Acciones</td>
-        </th>
+    <table border=1>
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido Paterno</td>
+                <td>Apellido Materno</td>
+                <td>Usuario</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
         <tbody>
             <?php
                 //while o cualquier ciclo que muestre los resultados de la funcion 
                 //getAll del modelo usuarios
+                foreach($datos as $dato){
+                    echo "<tr>";
+                    echo "<td>".$dato['Nombre']."</td>";
+                    echo "<td>".$dato['ApPaterno']."</td>";
+                    echo "<td>".$dato['ApMaterno']."</td>";
+                    echo "<td>".$dato['Usuario']."</td>";
+                    echo "<td><a href=''>Editar</a> <br><a href=''>Eliminar</a></td>";
+                    echo "</tr>";
+                }
             ?>
         </tbody>
     </table>

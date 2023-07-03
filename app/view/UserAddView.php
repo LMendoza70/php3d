@@ -1,6 +1,8 @@
 <div>
   <h2>Agregar un nuevo usuario</h2>
-  <form action="" method="post">
+  <!-- en el action se debe de poner la ruta del controlador y el metodo que se va a ejecutar -->
+  <!-- llamaremos al metodo add del controlador usuarios -->
+  <form action="http://localhost/php3d/?C=UserController&M=Add" method="post">
     <p>
       <label for="user">Usuario : </label
       ><input type="text" name="user" id="user" placeholder="Usuario..." />
