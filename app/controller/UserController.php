@@ -7,25 +7,25 @@
         private $usermodel;
         
         public function index(){
-            //define la ruta de la pagina a mostrar
-            $vista="app/view/UserIndexView.php";
             //inicializamos nuestro modelo para poder instanciarlo
             $this->usermodel=new UserModel();
             //declaramos la variable datos, en la que almacenaremos lo que nos arroje el metodo
             //getall de el modelo usuarios para posteriormente mostrarlos en una tabla 
             $datos=$this->usermodel->GetAll();
+            //define la ruta de la pagina a mostrar
+            $vista="app/view/admin/users/UserIndexView.php";            
             //incluimos la plantilla principal para poder invocarla 
-            include_once("app/view/PlantillaView.php");
+            include_once("app/view/admin/PlantillaView.php");
 
         }
 
         public function CallFormLogin(){
             $vista="app/view/LoginView.php";
-            include_once("app/view/PlantillaView.php");
+            include_once("app/view/admin/PlantillaView.php");
         }
 
         public function Login(){
-            $vista="app/view/home.php";
+            $vista="app/view/admin/home.php";
             //creamos una instancia del modelo
             $usermodel=new UserModel();
 
@@ -37,7 +37,7 @@
                 $x=$usuario['nombre'];
             }
 
-            include_once("app/view/PlantillaView.php");
+            include_once("app/view/admin/PlantillaView.php");
         }
 
         //agregamos controladores diversos para invocar otros metodos (agregar usuario, eliminar , editar)
@@ -45,8 +45,8 @@
 
         //agregamos una funcion para llamar al formulario de agregar usuario
         public function CallFormAdd(){
-            $vista="app/view/UserAddView.php";
-            include_once("app/view/PlantillaView.php");
+            $vista="app/view/admin/users/UserAddView.php";
+            include_once("app/view/admin/PlantillaView.php");
         }
 
         //agregamos la funcion para agregar un usuario
@@ -73,5 +73,58 @@
             header("location:http://localhost/php3d/?C=UserController&M=index");
         }
     }
+
+    //creamos el metodo para llamar el formulario de editar usuario
+    public function CallFormEdit(){
+        //verificamos que el metodo de envio de datos sea GET
+        if($_SERVER['REQUEST_METHOD']=='GET'){
+            //obtenemos el id del usuario a editar
+            $id=$_GET['id'];
+            //llamamos al metodo del modelo que obtiene los datos del usuario a editar
+            $modelo=new UserModel();
+            $datos=$modelo->getById($id);
+            //llamamos a la vista de editar usuario
+            $vista='app/View/admin/users/UserEditView.php';
+            include_once('app/view/admin/PlantillaView.php');
+        }
+    }
+
+    //creamos el metodo para editar un usuario
+    public function Edit(){
+        //verificamos que el metodo de envio de datos sea POST
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            //almacenamos los datos enviados por el formulario en un arreglo
+            $datos=array(
+                'IdUser'=>$_POST['id'],//agregamos el id del usuario a editar
+                'Nombre'=>$_POST['nombre'],
+                'ApPaterno'=>$_POST['apaterno'],
+                'ApMaterno'=>$_POST['amaterno'],
+                'Usuario'=>$_POST['user'],
+                'Password'=>$_POST['password'],
+                'Sexo'=>$_POST['sexo'],
+                'FchNacimiento'=>$_POST['fchnac']
+            );
+            //llamamos al metodo del modelo que actualiza los datos del usuario
+            $modelo=new UserModel();
+            $modelo->update($datos);
+            //redireccionamos al index de usuarios
+            header("Location:http://localhost/php3d/?C=UserController&M=index");
+        }
+    }
+
+    //Creamos el metodo para eliminar un usuario de la base de datos, este metodo se llamara una vez que 
+        //se haya confirmado la eliminacion del usuario en la vista de index mediante un confirm de javascript
+        public function Delete(){
+            //verificamos que el metodo de envio de datos sea GET
+            if($_SERVER['REQUEST_METHOD']=='GET'){
+                //obtenemos el id del usuario a eliminar
+                $id=$_GET['id'];
+                //llamamos al metodo del modelo que elimina al usuario de la base de datos
+                $modelo=new UserModel();
+                $modelo->delete($id);
+                //redireccionamos al index de usuarios
+                header("Location:http://localhost/php3d/?C=UserController&M=index");
+            }
+        }
 }
 ?>
