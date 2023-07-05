@@ -40,7 +40,7 @@
 <script>
     //creamos la funcion para eliminar un usuario por medio de su id y confirmamos si se desea eliminar
     function eliminar(id){
-      if(confirm("¿Desea eliminar el usuario?")){
+      if(confirm("¿Desea eliminar el usuario ?")){
         window.location.href="http://localhost/php3d/?C=UserController&M=Delete&id="+id;
         
       }

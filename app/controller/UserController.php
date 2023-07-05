@@ -68,8 +68,10 @@
             $usermodel=new UserModel();
             //llamamos al metodo adduser del modelo y le pasamos los datos del formulario mediante
             //el arreglo que creamos
-            $usermodel->Add($user);
+            $res=$usermodel->Add($user);
             //redireccionamos al index de usuarios
+            //podriamos poner una condicion if donde dependiendo de la respuesta te envie a una pantalla u otra
+
             header("location:http://localhost/php3d/?C=UserController&M=index");
         }
     }

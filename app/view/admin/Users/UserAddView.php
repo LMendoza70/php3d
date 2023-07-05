@@ -8,8 +8,8 @@
       ><input type="text" name="user" id="user" placeholder="Usuario..." />
     </p>
     <p>
-      <label for="password">Password : </label
-      ><input
+      <label for="password">Password : </label>
+      <input
         type="password"
         name="password"
         id="password"
