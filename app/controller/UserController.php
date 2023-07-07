@@ -138,8 +138,48 @@
                 'Usuario'=>$_POST['user'],
                 'Password'=>$_POST['password'],
                 'Sexo'=>$_POST['sexo'],
-                'FchNacimiento'=>$_POST['fchnac']
+                'FchNacimiento'=>$_POST['fchnac'],
+                'Avatar'=>$_POST['avatar']
             );
+
+            //procesamos nuestra imagen
+            //verificamos que traiga algo en files
+            if(isset($_FILES['avatar'])&& $_FILES['avatar']['error']===UPLOAD_ERR_OK){
+                //obtener los datos de la imagen
+                $nombreArchivo=$_FILES['avatar']['name'];
+                $tipoArchivo=$_FILES['avatar']['type'];
+                $tamanoArchivo=$_FILES['avatar']['size'];
+                $rutaTemporal=$_FILES['avatar']['tmp_name'];
+                //validamos el tipo de archivo que queremos subir
+                $extencioes=array('jpeg','jpg','png','gif');
+                $extencion=pathinfo($nombreArchivo,PATHINFO_EXTENSION);
+                if(!in_array($extencion,$extencioes)){
+                    echo "la imagen no tiene un formato aceptado en el servidor";
+                    exit;
+                }
+                //validamos que el archivo tenga un tamaño adecuado
+                $tamanomax=2*1024*1024;
+                if($tamanoArchivo>$tamanomax){
+                    echo "ya mejor sube una pelicula o una lona NMms";
+                    exit;
+                }
+                //generamos el nombre unico que se va a almacenar en el servidor 
+                $nombreArchivo=uniqid('Avatar_').'.'.$extencion;
+                //definimos la ruta de almacenamiento
+                $ruta="app/src/img/avatars/".$nombreArchivo;
+                if(!move_uploaded_file($rutaTemporal,$ruta)){
+                    echo "Error al cargar la imagen a la ruta destino";
+                    exit;
+                }
+                //borramos el archivo anterior
+                $this->usermodel=new UserModel();
+                $datosant=$this->usermodel->getById($datos['IdUser']);
+                if(!empty($datosant['Avatar'])){
+                    unlink('app/src/img/avatrs'.$datosant['Avatar']);
+                }
+                $datos['Avatar']=$nombreArchivo;
+            }    
+
             //llamamos al metodo del modelo que actualiza los datos del usuario
             $modelo=new UserModel();
             $modelo->update($datos);

@@ -128,7 +128,8 @@
             //paso1 creamos la consulta
             $sql="UPDATE user SET Nombre='".$user['Nombre']."', ApPaterno='".$user['ApPaterno']."', 
             ApMaterno='".$user['ApMaterno']."', Usuario='".$user['Usuario']."', Password='".$user['Password']."', 
-            Sexo='".$user['Sexo']."', FchNacimiento='".$user['FchNacimiento']."' WHERE IdUser=".$user['IdUser'];
+            Sexo='".$user['Sexo']."', FchNacimiento='".$user['FchNacimiento']."', 
+            Avatar='".$user['Avatar']."' WHERE IdUser=".$user['IdUser'];
             //paso 2 conectamos a la base de datos
             $connection =$this->bdconnection->getConecction();
             //paso 3 ejecutamos la consulta
