@@ -2,10 +2,13 @@
   <h2>Agregar un nuevo usuario</h2>
   <!-- en el action se debe de poner la ruta del controlador y el metodo que se va a ejecutar -->
   <!-- llamaremos al metodo add del controlador usuarios -->
-  <form action="http://localhost/php3d/?C=UserController&M=Add" method="post">
+  <form 
+  action="http://localhost/php3d/?C=UserController&M=Add" 
+  method="post" 
+  enctype="multipart/form-data">
     <p>
       <label for="user">Usuario : </label
-      ><input type="text" name="user" id="user" placeholder="Usuario..." />
+      ><input type="text" name="user" id="user" placeholder="Usuario..." required/>
     </p>
     <p>
       <label for="password">Password : </label>
@@ -48,6 +51,11 @@
     <p>
       <label for="fchnac">Fecha de nacimiento : </label>
       <input type="date" name="fchnac" id="fchnac" />
+    </p>
+    <p>
+      <label for="avatar">Avatar de usuario</label>
+      <!-- incliremos que acepte jpeg, png, gif -->
+      <input type="file" name="avatar" id="avatar" accept="image/*">
     </p>
     <p><input type="submit" value="Agregar" /></p>
   </form>

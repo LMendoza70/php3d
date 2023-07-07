@@ -79,10 +79,10 @@
         //metodo para insertar usuarios 
         public function Add($user){
             //paso 1 creamos la la consulta
-                $sql='INSERT INTO user (Nombre,ApPaterno,ApMaterno,Usuario,Password,Sexo,FchNacimiento)
+                $sql='INSERT INTO user (Nombre,ApPaterno,ApMaterno,Usuario,Password,Sexo,FchNacimiento,Avatar)
                 VALUES ("'.$user['Nombre'].'","'.$user['ApPaterno'].'"
                 ,"'.$user['ApMaterno'].'","'.$user['Usuario'].'","'.$user['Password'].'"
-                ,"'.$user['Sexo'].'","'.$user['FchNacimiento'].'")';
+                ,"'.$user['Sexo'].'","'.$user['FchNacimiento'].'","'.$user['Avatar'].'")';
             //paso 2 conectamos con la base de datos
                 $connection=$this->bdconnection->getConecction();
             //paso 3 ejecutamos la consulta
